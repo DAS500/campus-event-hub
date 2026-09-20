@@ -9,6 +9,8 @@ function App() {
 
   return (
     <>
+      <h1>Campus Event Hub</h1>
+      <p>Check-in Scanner - Preview</p>
       <section id="center">
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
