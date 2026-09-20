@@ -1,124 +1,102 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import './App.css';
+import { EventCard } from './components/EventCard';
+import type { EventData } from './components/EventCard';
+
+const SAMPLE_EVENTS: EventData[] = [
+  {
+    id: 1,
+    title: 'Hội Thảo Công Nghệ AI & Tương Lai Lập Trình',
+    description:
+      'Khám phá xu hướng trí tuệ nhân tạo, GenAI và cách các kỹ sư phần mềm tối ưu hiệu suất công việc.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&auto=format&fit=crop&q=80',
+    category: 'Công nghệ',
+    startDate: '2026-09-25T08:30:00',
+    location: 'UIT',
+    price: 150000,
+    organizer: {
+      name: 'Tech Community VN',
+    },
+    status: 'upcoming',
+  },
+
+  {
+    id: 2,
+    title: 'Workshop Thiết Kế UI/UX',
+    description:
+      'Thực hành thiết kế Design System responsive và tối ưu trải nghiệm người dùng.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&auto=format&fit=crop&q=80',
+    category: 'Thiết kế',
+    startDate: '2026-09-27T14:00:00',
+    location: 'Google Meet',
+    isOnline: true,
+    price: 'Miễn phí',
+    organizer: {
+      name: 'Designers Hub',
+    },
+    status: 'upcoming',
+  },
+
+  {
+    id: 3,
+    title: 'Đêm Nhạc Acoustic Dưới Ánh Sao',
+    description:
+      'Không gian âm nhạc thư giãn cuối tuần cùng các nghệ sĩ indie.',
+    imageUrl:
+      'https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800&auto=format&fit=crop&q=80',
+    category: 'Âm nhạc',
+    startDate: '2026-10-02T19:30:00',
+    location: 'TP. Hồ Chí Minh',
+    price: 300000,
+    organizer: {
+      name: 'Acoustic Saigon',
+    },
+    status: 'sold_out',
+  },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const handleRegister = (id: string | number) => {
+    console.log('Đăng ký sự kiện ID:', id);
+  };
+
+  const handleBookmark = (
+    id: string | number,
+    isBookmarked: boolean
+  ) => {
+    console.log(
+      `Sự kiện ${id} đã được ${
+        isBookmarked ? 'lưu' : 'bỏ lưu'
+      }`
+    );
+  };
 
   return (
-    <>
-      <h1>Campus Event Hub</h1>
-      <p>Check-in Scanner - Preview</p>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="min-h-screen bg-gray-50 p-8">
+      <div className="mx-auto max-w-7xl">
+        <h1 className="text-3xl font-bold text-gray-900">
+          Campus Event Hub
+        </h1>
 
-      <div className="ticks"></div>
+        <p className="mt-2 text-gray-600">
+          Khám phá các sự kiện sắp diễn ra
+        </p>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+        {/* Responsive Grid */}
+        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {SAMPLE_EVENTS.map((event) => (
+            <EventCard
+              key={event.id}
+              event={event}
+              onRegister={handleRegister}
+              onBookmark={handleBookmark}
+            />
+          ))}
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;
